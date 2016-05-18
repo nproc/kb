@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func NewLinkTest(t *testing.T) {
+func TestNewLink(t *testing.T) {
 	url, err := url.New("https://google.com")
 
 	assert.Nil(t, err)
@@ -16,5 +16,5 @@ func NewLinkTest(t *testing.T) {
 	link := link.New(url)
 
 	assert.NotEmpty(t, link.ID().String())
-	assert.Equal(t, "https://google.com", link.URL())
+	assert.Equal(t, "https://google.com", link.URL().String())
 }
