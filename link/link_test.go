@@ -5,6 +5,7 @@ import (
 
 	"github.com/nproc/kb/link"
 	"github.com/nproc/kb/url"
+	"github.com/nproc/kb/user"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -13,8 +14,11 @@ func TestNewLink(t *testing.T) {
 
 	assert.Nil(t, err)
 
-	link := link.New(url)
+	user := user.New("Tarcísio Gruppi", "txgruppi")
+
+	link := link.New(url, user)
 
 	assert.NotEmpty(t, link.ID().String())
 	assert.Equal(t, "https://google.com", link.URL().String())
+	assert.Equal(t, user, link.SharedBy())
 }
