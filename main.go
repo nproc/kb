@@ -5,6 +5,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/nproc/kb/command"
+	"github.com/nproc/kb/user"
 	"github.com/tucnak/telebot"
 )
 
@@ -24,6 +26,17 @@ func run() error {
 	messages := make(chan telebot.Message)
 
 	bot.Listen(messages, 1*time.Second)
+
+	commandBus := command.NewCommandBus()
+
+	for message := range messages {
+		user := user.FromTelegramMessage(message)
+
+		commandBus(
+			user,
+			message.Text,
+		)
+	}
 
 	return nil
 }

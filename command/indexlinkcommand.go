@@ -4,15 +4,18 @@ import (
 	"strings"
 
 	"github.com/nproc/kb/url"
+	"github.com/nproc/kb/user"
 )
 
 type IndexLinkCommand interface {
 	URL() url.URL
 	Tags() []string
+	RequestedBy() user.User
 }
 
 type indexLinkCommand struct {
 	url  url.URL
+	user user.User
 	tags []string
 }
 
@@ -24,7 +27,12 @@ func (c indexLinkCommand) Tags() []string {
 	return c.tags
 }
 
-func NewIndexLinkCommandFromCommandString(
+func (c indexLinkCommand) RequestedBy() user.User {
+	return c.user
+}
+
+func NewIndexLinkCommandFromUserCommandString(
+	user user.User,
 	commandString string,
 ) (IndexLinkCommand, error) {
 	parts := strings.SplitN(commandString, " ", 2)
@@ -43,6 +51,7 @@ func NewIndexLinkCommandFromCommandString(
 
 	return indexLinkCommand{
 		url:  url,
+		user: user,
 		tags: tags,
 	}, nil
 }

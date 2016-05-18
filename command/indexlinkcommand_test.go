@@ -4,11 +4,13 @@ import (
 	"testing"
 
 	"github.com/nproc/kb/command"
+	"github.com/nproc/kb/user"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewIndexLinkCommandFromCommandString(t *testing.T) {
-	command, err := command.NewIndexLinkCommandFromCommandString(
+func TestNewIndexLinkCommandFromUserCommandString(t *testing.T) {
+	command, err := command.NewIndexLinkCommandFromUserCommandString(
+		user.New("Andrey", "CentaurWarchief"),
 		"https://github.com #github #gh #os",
 	)
 
