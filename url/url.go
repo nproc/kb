@@ -17,6 +17,11 @@ func (u url) String() string {
 	return string(u)
 }
 
+func NewOrNil(urlString string) URL {
+	url, _ := New(urlString)
+	return url
+}
+
 func New(urlString string) (URL, error) {
 	if !govalidator.IsURL(urlString) {
 		return nil, ErrInvalidURL

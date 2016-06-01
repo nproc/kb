@@ -7,6 +7,12 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestNewOrNil(t *testing.T) {
+	assert.Nil(t, url.NewOrNil("http"))
+	assert.NotNil(t, url.NewOrNil("http://google.com"))
+	assert.NotNil(t, url.NewOrNil("https://google.com"))
+}
+
 func TestNewURL(t *testing.T) {
 	u, err := url.New("https://google.com")
 
