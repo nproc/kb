@@ -82,3 +82,9 @@ func TestBoltAdd(t *testing.T) {
 		return nil
 	})
 }
+
+func TestBoltAddKeepsOnlyOneLinkReferencePerTag(t *testing.T) {
+}
+
+func TestBoltAddOverridePreviouslyIndexedURL(t *testing.T) {
+}
