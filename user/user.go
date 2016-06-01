@@ -1,6 +1,7 @@
 package user
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 
@@ -10,6 +11,7 @@ import (
 type User interface {
 	FullName() string
 	Username() string
+	json.Marshaler
 }
 
 type user struct {
@@ -23,6 +25,13 @@ func (u user) FullName() string {
 
 func (u user) Username() string {
 	return u.username
+}
+
+func (u user) MarshalJSON() ([]byte, error) {
+	return json.Marshal(map[string]string{
+		"full_name": u.fullName,
+		"username":  u.username,
+	})
 }
 
 func FromTelegramMessage(message telebot.Message) User {
